@@ -63,14 +63,14 @@ app.use((err: any, _req: express.Request, res: express.Response, _next: express.
 async function start() {
   await getDb();
   app.listen(config.port, () => {
-    console.log(`\n╔══════════════════════════════════════════════════╗`);
-    console.log(`║  OA 审批系统 - 本地服务器                          ║`);
-    console.log(`╠══════════════════════════════════════════════════╣`);
-    console.log(`║  地址:     http://localhost:${config.port}              ║`);
-    console.log(`║  租户:     ${config.tenantName} (${config.tenantId})`.padEnd(50) + `║`);
-    console.log(`║  环境:     ${config.nodeEnv}`.padEnd(50) + `║`);
-    console.log(`║  数据库:   ${config.db.path}`.padEnd(50) + `║`);
-    console.log(`╚══════════════════════════════════════════════════╝\n`);
+    console.log(`\n`);
+    console.log(`║  OA Approval System - Local Server                   ║`);
+    console.log(`╠══════════════════════════════════════════════════════╣`);
+    console.log(`║  Address:  http://localhost:${config.port}              ║`);
+    console.log(`║  Tenant:   ${config.tenantName} (${config.tenantId})`.padEnd(50) + `║`);
+    console.log(`║  Env:      ${config.nodeEnv}`.padEnd(50) + `║`);
+    console.log(`║  Database: ${config.db.path}`.padEnd(50) + `║`);
+    console.log(`╚══════════════════════════════════════════════════════╝\n`);
   });
 }
 

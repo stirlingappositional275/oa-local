@@ -1,5 +1,5 @@
 /**
- * File Vault Routes — 文件保险箱 API
+ * File Vault Routes
  */
 
 import { Router, Request, Response } from 'express';

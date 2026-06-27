@@ -1,5 +1,5 @@
 /**
- * Admin Routes — 管理员审计面板
+ * Admin Routes — Audit dashboard
  */
 
 import { Router, Request, Response } from 'express';

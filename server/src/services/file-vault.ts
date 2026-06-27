@@ -1,11 +1,11 @@
 /**
- * File Vault Service — 文件保险箱
+ * File Vault Service
  * 
- * 核心规则:
- * - 上传: 所有人可传
- * - 下载: 默认禁止，API 层拦截
- * - 预览: 审批人可通过 Base64 流式渲染查看
- * - 邮件: 审批通过后按标签匹配收件人发送
+ * Rules:
+ * - Upload: all users
+ * - Download: blocked by default (API-level intercept)
+ * - Preview: Base64 streaming for approvers
+ * - Email: dispatched by tag on approval
  */
 
 import { v4 as uuidv4 } from 'uuid';
