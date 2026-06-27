@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  background: #f2f2f7;
+  color: #1d1d1f;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Glass nav */
+.nav-glass {
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border-bottom: 0.5px solid rgba(0,0,0,0.05);
+}
+
+/* Cards */
+.card-3d {
+  background: white;
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04), 0 0 0 0.5px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.03);
+}
+.card-elevated {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.07), 0 0 0 0.5px rgba(0,0,0,0.05);
+}
+
+/* Stat card */
+.stat-3d {
+  background: white;
+  border-radius: 14px;
+  padding: 12px;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.03), 0 0 0 0.5px rgba(0,0,0,0.04);
+}
+
+/* Buttons */
+.btn-3d {
+  border: none; border-radius: 13px; padding: 13px 18px;
+  font-size: 14px; font-weight: 600; cursor: pointer;
+  transition: all 0.2s; letter-spacing: -0.1px;
+}
+.btn-3d:active { transform: scale(0.97); }
+.btn-primary-3d {
+  background: linear-gradient(135deg,#6366f1,#8b5cf6); color: white;
+  box-shadow: 0 4px 16px rgba(99,102,241,0.28), inset 0 1px 0 rgba(255,255,255,0.15);
+}
+.btn-secondary-3d { background: #f2f2f7; color: #6366f1; }
+.btn-success-3d {
+  background: linear-gradient(135deg,#059669,#34d399); color: white;
+  box-shadow: 0 4px 16px rgba(52,211,153,0.28);
+}
+.btn-danger-3d {
+  background: linear-gradient(135deg,#dc2626,#f87171); color: white;
+  box-shadow: 0 4px 16px rgba(248,113,113,0.28);
+}
+
+/* Pills */
+.pill { padding: 6px 14px; border-radius: 20px; font-size: 11px; font-weight: 500; background: #f2f2f7; color: #3c3c43; border: none; cursor: pointer; transition: all 0.15s; }
+.pill-active { background: linear-gradient(135deg,#6366f1,#8b5cf6); color: white; box-shadow: 0 2px 8px rgba(99,102,241,0.25); }
+
+/* Badges */
+.badge-sm { padding: 2px 8px; border-radius: 8px; font-size: 10px; font-weight: 600; }
+.badge-pending { background: #fef3c7; color: #b45309; }
+.badge-approved { background: #d1fae5; color: #065f46; }
+.badge-rejected { background: #fee2e2; color: #991b1b; }
+
+/* Stepper */
+.step-dot { width: 24px; height: 24px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; flex-shrink: 0; }
+.step-done { background: linear-gradient(135deg,#059669,#34d399); color: white; box-shadow: 0 2px 8px rgba(52,211,153,0.25); }
+.step-current { background: white; border: 2px solid #6366f1; color: #6366f1; box-shadow: 0 0 0 3px rgba(99,102,241,0.1); }
+.step-wait { background: #f2f2f7; color: #aeaeb2; }
+.step-line { width: 1.5px; flex: 1; min-height: 16px; margin: 2px 0; }
+.step-line-done { background: linear-gradient(#34d399,rgba(52,211,153,0.15)); }
+.step-line-wait { background: #e5e5ea; }
+
+/* Input */
+.input-3d {
+  width: 100%; padding: 11px 13px; border-radius: 11px;
+  border: 1px solid #d1d1d6; font-size: 14px; outline: none;
+  background: white; transition: border-color 0.15s;
+}
+.input-3d:focus { border-color: #6366f1; box-shadow: 0 0 0 3px rgba(99,102,241,0.08); }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 2px; }

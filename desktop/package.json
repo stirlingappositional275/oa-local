@@ -1,0 +1,94 @@
+{
+  "name": "oa-local-desktop",
+  "version": "1.0.0",
+  "description": "OA审批系统 - 桌面客户端",
+  "author": "OA Team",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron . --dev",
+    "build:win": "electron-builder --win portable --x64",
+    "build:win:installer": "electron-builder --win nsis --x64",
+    "build:mac": "electron-builder --mac --universal",
+    "build:all": "electron-builder --win --mac"
+  },
+  "build": {
+    "appId": "com.oa.local.desktop",
+    "productName": "OA审批系统",
+    "copyright": "Copyright 2026",
+    "directories": {
+      "output": "dist-package"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "icon.png",
+      "client-dist/**/*",
+      "!node_modules/**"
+    ],
+    "extraResources": [],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        },
+        {
+          "target": "portable",
+          "arch": ["x64"]
+        }
+      ],
+      "icon": "icon.png",
+      "publisherName": "OA Team"
+    },
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": ["universal", "x64", "arm64"]
+        }
+      ],
+      "icon": "icon.png",
+      "category": "public.app-category.business",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "OA审批系统",
+      "installerIcon": "icon.png",
+      "uninstallerIcon": "icon.png",
+      "installerHeaderIcon": "icon.png",
+      "language": "2052",
+      "displayLanguageSelector": false,
+      "license": "LICENSE.txt"
+    },
+    "portable": {
+      "artifactName": "OA审批系统_${version}_portable.exe"
+    },
+    "dmg": {
+      "title": "OA审批系统",
+      "artifactName": "OA审批系统_${version}_${arch}.dmg",
+      "contents": [
+        {
+          "x": 130,
+          "y": 220
+        },
+        {
+          "x": 410,
+          "y": 220,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "afterPack": null
+  },
+  "devDependencies": {
+    "electron": "^28.2.0",
+    "electron-builder": "^24.13.3"
+  }
+}

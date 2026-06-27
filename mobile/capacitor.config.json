@@ -1,0 +1,9 @@
+{
+  "appId": "com.oa.local.mobile",
+  "appName": "OA审批",
+  "webDir": "../client/dist",
+  "server": {
+    "url": "http://localhost:3001",
+    "cleartext": true
+  }
+}

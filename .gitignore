@@ -1,0 +1,66 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build output
+dist/
+build/
+dist-package/
+dist-all/
+
+# Environment files (contains secrets)
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Database files
+*.db
+*.db-journal
+*.db-wal
+
+# Uploads
+uploads/*
+!uploads/.gitkeep
+
+# Logs
+*.log
+npm-debug.log*
+
+# Mobile
+mobile/android/app/build/
+mobile/android/.gradle/
+mobile/web-build/
+mobile/ios/
+
+# Desktop
+desktop/dist-package/
+desktop/client-dist/
+
+# Lock files (optional - keep package-lock.json for reproducibility)
+# package-lock.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Temp
+*.bak
+tmp/
+temp/
+
+# Electron cache
+desktop/cache/
