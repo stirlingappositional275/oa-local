@@ -113,52 +113,52 @@ console.log('📦 Step 4: Creating Windows installer...');
 
 const installBat = `@echo off
 chcp 65001 >nul
-title OA审批系统 - 服务器安装
+title OA Approval System - Server Setup
 
 echo.
 echo ╔══════════════════════════════════════════════╗
 echo ║     OA 审批系统 - 服务器安装程序              ║
-echo ║     版本: ${VERSION}                                  ║
+echo ║     Version: ${VERSION}                                  ║
 echo ╚══════════════════════════════════════════════╝
 echo.
 
 :: Check Node.js
 where node >nul 2>&1
 if %ERRORLEVEL% neq 0 (
-    echo ❌ 未找到 Node.js，请先安装 Node.js 20+
-    echo    下载地址: https://nodejs.org
+    echo ❌ 未找到 Node.js，请先Install Node.js 20+
+    echo    Download: https://nodejs.org
     pause
     exit /b 1
 )
 
-echo ✅ Node.js 版本:
+echo ✅ Node.js Version:
 node --version
 echo.
 
 :: Install dependencies
-echo 📦 安装依赖中...
+echo 📦 Installing dependencies...
 call npm install --production --no-audit --no-fund
 if %ERRORLEVEL% neq 0 (
-    echo ❌ 依赖安装失败
+    echo ❌ Dependency install failed
     pause
     exit /b 1
 )
-echo ✅ 依赖安装完成
+echo ✅ Dependencies installed
 echo.
 
 :: Run setup
-echo 🔧 初始配置...
+echo 🔧 Initial configuration...
 node setup.js
 echo.
 
 :: Ask for service installation
 echo.
 echo ┌──────────────────────────────────────────────┐
-echo │  安装选项                                      │
+echo │  Install Options                                      │
 echo ├──────────────────────────────────────────────┤
-echo │  [1] 前台运行 (当前窗口)                        │
-echo │  [2] 安装为 Windows 服务 (需管理员权限)           │
-echo │  [3] 创建桌面快捷方式 + 开机自启                  │
+echo │  [1] Run in foreground (this window)                        │
+echo │  [2] Install as Windows service (admin required)           │
+echo │  [3] Create shortcut + auto-start                  │
 echo └──────────────────────────────────────────────┘
 set /p choice="请输入选项 (1/2/3): "
 
@@ -169,36 +169,36 @@ goto run_foreground
 
 :run_foreground
 echo.
-echo 🚀 启动服务器...
-echo    访问地址: http://localhost:3001
-echo    按 Ctrl+C 停止
+echo 🚀 Starting server...
+echo    URL: http://localhost:3001
+echo    Press Ctrl+C to stop
 echo.
 node dist/index.js
 goto end
 
 :install_service
 echo.
-echo 🔧 安装 Windows 服务...
-echo    需要管理员权限
+echo 🔧 Installing Windows service...
+echo    Requires admin privileges
 echo.
 :: Check if pm2 is installed
 call npm install -g pm2 >nul 2>&1
 pm2 start dist/index.js --name oa-server
 pm2 save
 pm2 startup
-echo ✅ 服务已安装，将在系统启动时自动运行
+echo ✅ Service installed, will auto-start on boot
 echo.
 echo 常用命令:
-echo   查看状态: pm2 status
-echo   查看日志: pm2 logs oa-server
-echo   重启服务: pm2 restart oa-server
-echo   停止服务: pm2 stop oa-server
+echo   Status: pm2 status
+echo   Logs: pm2 logs oa-server
+echo   Restart: pm2 restart oa-server
+echo   Stop: pm2 stop oa-server
 echo.
 goto end
 
 :create_shortcut
 echo.
-echo 🔧 创建快捷方式和开机自启...
+echo 🔧 Creating shortcut and auto-start...
 :: Create VBS launcher
 set LAUNCHER=%~dp0start-server.vbs
 echo Set WshShell = CreateObject("WScript.Shell") > "%LAUNCHER%"
@@ -216,7 +216,7 @@ echo oLink.Save >> "%TEMP%\create_shortcut.vbs"
 cscript /nologo "%TEMP%\create_shortcut.vbs"
 del "%TEMP%\create_shortcut.vbs"
 
-echo ✅ 开机自启已配置
+echo ✅ Auto-start configured
 
 :: Also create desktop shortcut
 echo Set oWS = WScript.CreateObject("WScript.Shell") > "%TEMP%\create_desktop.vbs"
@@ -229,19 +229,19 @@ echo oLink.Save >> "%TEMP%\create_desktop.vbs"
 cscript /nologo "%TEMP%\create_desktop.vbs"
 del "%TEMP%\create_desktop.vbs"
 
-echo ✅ 桌面快捷方式已创建
+echo ✅ Desktop shortcut created
 echo.
-echo 服务器将在下次开机时自动启动。
-echo 立即启动请双击桌面上的「OA审批系统」快捷方式。
+echo Server will start automatically on next boot.
+echo To start now, double-click「OA审批系统」shortcut.
 echo.
 
 :end
 echo.
 echo ┌──────────────────────────────────────────────┐
-echo │  安装完成！                                    │
+echo │  Installation complete！                                    │
 echo ├──────────────────────────────────────────────┤
-echo │  1. 编辑 .env 填入 Azure AD 配置                │
-echo │  2. 访问 http://localhost:3001 使用系统          │
+echo │  1. Edit .env to configure Azure AD                │
+echo │  2. Access http://localhost:3001          │
 echo └──────────────────────────────────────────────┘
 echo.
 pause
@@ -255,13 +255,13 @@ set -e
 
 echo "╔══════════════════════════════════════════════╗"
 echo "║     OA 审批系统 - 服务器安装程序              ║"
-echo "║     版本: ${VERSION}                                  ║"
+echo "║     Version: ${VERSION}                                  ║"
 echo "╚══════════════════════════════════════════════╝"
 echo ""
 
 # Check Node.js
 if ! command -v node &> /dev/null; then
-    echo "❌ 未找到 Node.js，请先安装 Node.js 20+"
+    echo "❌ 未找到 Node.js，请先Install Node.js 20+"
     echo "   Ubuntu: curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - && sudo apt-get install -y nodejs"
     exit 1
 fi
@@ -270,13 +270,13 @@ echo "✅ Node.js $(node --version)"
 echo ""
 
 # Install dependencies
-echo "📦 安装依赖中..."
+echo "📦 Installing dependencies..."
 npm install --production --no-audit --no-fund
-echo "✅ 依赖安装完成"
+echo "✅ Dependencies installed"
 echo ""
 
 # Run setup
-echo "🔧 初始配置..."
+echo "🔧 Initial configuration..."
 node setup.js
 echo ""
 
@@ -315,10 +315,10 @@ fi
 
 echo ""
 echo "┌──────────────────────────────────────────────┐"
-echo "│  安装完成！                                    │"
+echo "│  Installation complete！                                    │"
 echo "├──────────────────────────────────────────────┤"
-echo "│  1. 编辑 .env 填入 Azure AD 配置                │"
-echo "│  2. 访问 http://localhost:3001 使用系统          │"
+echo "│  1. Edit .env to configure Azure AD                │"
+echo "│  2. Access http://localhost:3001          │"
 echo "└──────────────────────────────────────────────┘"
 `;
 fs.writeFileSync(path.join(PACKAGE_DIR, 'install.sh'), installSh);
@@ -374,18 +374,18 @@ try {
 const stats = fs.statSync(zipFile);
 console.log('');
 console.log('╔══════════════════════════════════════════════╗');
-console.log('║  🎉 服务器打包完成！                           ║');
+console.log('║  🎉 Server packaging complete！                           ║');
 console.log('╠══════════════════════════════════════════════╣');
-console.log(`║  输出目录: ${DIST}`.padEnd(50) + '║');
-console.log(`║  安装包:   ${PACKAGE_NAME}.zip (${(stats.size/1024).toFixed(0)} KB)`.padEnd(50) + '║');
-console.log(`║  版本:     ${VERSION}`.padEnd(50) + '║');
+console.log(`║  Output directory: ${DIST}`.padEnd(50) + '║');
+console.log(`║  Package:   ${PACKAGE_NAME}.zip (${(stats.size/1024).toFixed(0)} KB)`.padEnd(50) + '║');
+console.log(`║  Version:     ${VERSION}`.padEnd(50) + '║');
 console.log('╠══════════════════════════════════════════════╣');
-console.log('║  部署步骤:                                     ║');
-console.log('║  1. 解压 ZIP 到服务器                           ║');
-console.log('║  2. 安装 Node.js 20+                          ║');
-console.log('║  3. 双击 install.bat (或 ./install.sh)        ║');
-console.log('║  4. 编辑 .env 配置 Azure AD + SMTP             ║');
-console.log('║  5. 访问 http://服务器IP:3001                  ║');
+console.log('║  Deployment steps:                                     ║');
+console.log('║  1. Extract ZIP to server                           ║');
+console.log('║  2. Install Node.js 20+                          ║');
+console.log('║  3. Run install.bat (or ./install.sh)        ║');
+console.log('║  4. Edit .env for Azure AD + SMTP             ║');
+console.log('║  5. Access http://SERVER_IP:3001                  ║');
 console.log('╚══════════════════════════════════════════════╝');
 
 // ━━ Helper ━━

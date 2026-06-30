@@ -27,7 +27,7 @@ const BUILD_ALL = !SERVER_ONLY && !CLIENT_ONLY;
 console.log(`
 ╔══════════════════════════════════════════════════╗
 ║          OA 审批系统 - 统一构建工具                ║
-║          版本: ${VERSION}                                  ║
+║          Version: ${VERSION}                                  ║
 ╚══════════════════════════════════════════════════╝
 `);
 
@@ -38,7 +38,7 @@ let failed = false;
 // ═══════════════════════════════════════════
 if (BUILD_ALL || SERVER_ONLY) {
   console.log('━'.repeat(50));
-  console.log('📦 [1/3] 构建服务器安装包...');
+  console.log('📦 [1/3] Building server package...');
   console.log('━'.repeat(50));
   
   try {
@@ -47,9 +47,9 @@ if (BUILD_ALL || SERVER_ONLY) {
       cwd: serverDir,
       stdio: 'inherit',
     });
-    console.log('✅ 服务器安装包构建完成\n');
+    console.log('✅ Server install构建完成\n');
   } catch (e) {
-    console.error('❌ 服务器构建失败:', e.message);
+    console.error('❌ Server build failed:', e.message);
     failed = true;
   }
 }
@@ -59,7 +59,7 @@ if (BUILD_ALL || SERVER_ONLY) {
 // ═══════════════════════════════════════════
 if (BUILD_ALL || CLIENT_ONLY) {
   console.log('━'.repeat(50));
-  console.log('📦 [2/3] 构建 Web 前端...');
+  console.log('📦 [2/3] Building Web frontend...');
   console.log('━'.repeat(50));
   
   try {
@@ -68,9 +68,9 @@ if (BUILD_ALL || CLIENT_ONLY) {
       cwd: clientDir,
       stdio: 'inherit',
     });
-    console.log('✅ Web 前端构建完成\n');
+    console.log('✅ Web frontend built\n');
   } catch (e) {
-    console.error('❌ Web 前端构建失败:', e.message);
+    console.error('❌ Web frontend build failed:', e.message);
     failed = true;
   }
 }
@@ -80,7 +80,7 @@ if (BUILD_ALL || CLIENT_ONLY) {
 // ═══════════════════════════════════════════
 if (BUILD_ALL || CLIENT_ONLY) {
   console.log('━'.repeat(50));
-  console.log('📦 [3/3] 构建桌面客户端...');
+  console.log('📦 [3/3] Building desktop client...');
   console.log('━'.repeat(50));
   
   try {
@@ -95,18 +95,18 @@ if (BUILD_ALL || CLIENT_ONLY) {
     // Check platform
     if (process.platform === 'win32') {
       execSync('npm run build:win', { cwd: desktopDir, stdio: 'inherit' });
-      console.log('✅ Windows 桌面客户端构建完成');
+      console.log('✅ Windows Desktop client built');
     } else if (process.platform === 'darwin') {
       execSync('npm run build:mac', { cwd: desktopDir, stdio: 'inherit' });
-      console.log('✅ macOS 桌面客户端构建完成');
+      console.log('✅ macOS Desktop client built');
     } else {
-      console.log('⚠️  桌面客户端构建仅支持 Windows 和 macOS');
+      console.log('⚠️  Desktop build only available on Windows and macOS');
       console.log('   在目标平台上运行: cd desktop && npm run build:win 或 npm run build:mac');
     }
     console.log('');
   } catch (e) {
-    console.error('❌ 桌面客户端构建失败:', e.message);
-    console.error('   请确保已安装 electron 和 electron-builder');
+    console.error('❌ Desktop client build failed:', e.message);
+    console.error('   Please install electron and electron-builder');
     console.error('   cd desktop && npm install && npm run build:win');
     failed = true;
   }
@@ -116,22 +116,22 @@ if (BUILD_ALL || CLIENT_ONLY) {
 // Summary
 // ═══════════════════════════════════════════
 console.log('═'.repeat(50));
-console.log(failed ? '⚠️  部分构建失败，请查看上方日志' : '🎉 全部构建完成！');
+console.log(failed ? '⚠️  Some builds failed，请查看上方日志' : '🎉 Build complete！');
 console.log('═'.repeat(50));
 console.log('');
-console.log('输出文件:');
-console.log('  服务器:   server/dist-package/oa-server-v' + VERSION + '.zip');
-console.log('  Web前端:  client/dist/');
-console.log('  桌面端:   desktop/dist-package/');
+console.log('Output files:');
+console.log('  Server:   server/dist-package/oa-server-v' + VERSION + '.zip');
+console.log('  Web frontend:  client/dist/');
+console.log('  Desktop:   desktop/dist-package/');
 console.log('');
 
 if (!failed) {
-  console.log('部署步骤:');
-  console.log('  1. 将 oa-server-v' + VERSION + '.zip 复制到服务器并解压');
-  console.log('  2. 双击 install.bat 完成服务器安装');
-  console.log('  3. 编辑 .env 配置 Azure AD 和 SMTP');
-  console.log('  4. 分发桌面客户端安装包给用户');
-  console.log('  5. 用户安装后自动连接服务器');
+  console.log('Deployment steps:');
+  console.log('  1. Copy oa-server-v' + VERSION + '.zip to server and extract');
+  console.log('  2. Double-click install.bat to install');
+  console.log('  3. Edit .env to configure Azure AD and SMTP');
+  console.log('  4. 分发桌面客户端Package给用户');
+  console.log('  5. Users connect to server automatically');
 }
 
 function getArg(name) {

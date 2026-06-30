@@ -82,18 +82,18 @@ function initLang(): Lang {
   
   // Detect system language
   const sys = (navigator.language || '').toLowerCase();
-  if (sys.startsWith('zh')) return 'zh';
+  if (sys.startsWith('zh')) return 'en';
   if (sys.startsWith('en')) return 'en';
   
   // Also check navigator.languages for secondary preferences
   const langs = navigator.languages || [];
   for (const l of langs) {
     const ll = l.toLowerCase();
-    if (ll.startsWith('zh')) return 'zh';
+    if (ll.startsWith('zh')) return 'en';
     if (ll.startsWith('en')) return 'en';
   }
   
-  return 'zh'; // fallback
+  return 'en'; // fallback
 }
 
 _lang = initLang();
